@@ -7,8 +7,14 @@ export default gql`
         lastName: String
         username: String!
         email: String!
+        password: String!
         createdAt: String!
         updatedAt: String!
+    }
+    type LoginResult {
+        ok: Boolean!
+        token: String
+        error: String
     }
     type Mutation {
         createAccount(
@@ -18,6 +24,7 @@ export default gql`
             email: String!
             password: String!
         ): User
+        login(username:String!, password:String!): LoginResult!
     }
     type Query {
         seeProfile(username: String): User
