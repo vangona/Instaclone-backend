@@ -2,8 +2,10 @@ import client from "../../client";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
+import { GraphQLUpload } from "graphql-upload";
 
 export default {
+    Upload: GraphQLUpload,
     Mutation: {
         editProfile: protectedResolver(
             async (_, 
@@ -13,6 +15,7 @@ export default {
                     username,
                     email,
                     password:newPassword,
+                    bio,
                 },
                 { 
                     loggedInUser
@@ -31,6 +34,7 @@ export default {
                         lastName,
                         username,
                         email,
+                        bio,
                         ...(uglyPassword && { password: uglyPassword }),
                     },
                     })
