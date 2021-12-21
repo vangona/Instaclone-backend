@@ -1,3 +1,4 @@
+import { createWriteStream } from "fs";
 import client from "../../client";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -16,11 +17,16 @@ export default {
                     email,
                     password:newPassword,
                     bio,
+                    avatar,
                 },
                 { 
                     loggedInUser
                 }
             ) => {
+                const {filename, createReadStream} = await avatar;
+                const readStream = createReadStream();
+                const writeStream = createWriteStream(process.cwd() + "/uploads/" + filename);
+                readStream.pipe(writeStream);
                 let uglyPassword = null;
                 if (newPassword) {
                     uglyPassword = await bcrypt.hash(newPassword, 10)

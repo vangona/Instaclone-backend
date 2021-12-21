@@ -5,6 +5,8 @@ import express from "express";
 import { typeDefs, resolvers } from "./schema";
 import { getUser, protectResolver } from "./users/users.utils";
 
+const PORT = process.env.PORT;
+
 const startServer = async () => {
     const server = new ApolloServer({
         typeDefs,
