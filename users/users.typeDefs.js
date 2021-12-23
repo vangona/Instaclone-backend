@@ -8,9 +8,9 @@ export default gql`
         username: String!
         email: String!
         password: String!
-        createdAt: String!
-        updatedAt: String!
         bio: String
         avatar: String
+        createdAt: String!
+        updatedAt: String!
     }
 `;
