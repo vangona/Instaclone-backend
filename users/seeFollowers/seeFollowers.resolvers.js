@@ -3,11 +3,17 @@ import client from "../../client";
 export default {
   Query: {
     seeFollowers: async (_, { username, page }) => {
-      const aFollowers = await client.user
+      const followers = await client.user
         .findUnique({ where: { username } })
-        .followers();
+        .followers({
+          take: 5,
+          skip: (page - 1) * 5,
+        });
 
-      console.log(aFollowers);
+      return {
+        ok: true,
+        followers,
+      };
     },
   },
 };
